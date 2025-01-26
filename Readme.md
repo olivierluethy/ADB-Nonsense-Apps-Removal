@@ -10,10 +10,10 @@ ADB is an essential tool for developers, advanced users, and enthusiasts who wan
 
 There are so many preinstalled apps on every phone that are completely unnecessary and don't want to be on your phone anymore. If you have Netflix, YouTube or Google, try to uninstall them ... Well, you can't. You can only disable them, but that doesn't mean they've been removed from your phone. They can still do stuff, and that's what this project is all about. You can check which apps you don't want anymore and remove them intuitively.
 
-### **Prerequesits**
+### **Prerequisites**
 
-You only need your android based phone and a computer.
-Note: It is not required to root your mobile device!
+All you need is your Android-based phone and a computer.
+Note: It is not necessary to root your mobile device!
 
 ### **What You Can Do with ADB**
 
@@ -130,7 +130,7 @@ Once the execution policy is set, you can create and run a PowerShell script to 
 
 To run the powershell script, you just need to copy and paste the entire script into the input field. Make sure to use **Windows PowerShell ISE** and not **Windows PowerShell** as this wouldn't contain a big input field to enter the script you want to run.
 
-### **How to install apk on your phone if you have accidentally removed myfiles from your phone**
+### **How to install APK on your phone if you have accidentally removed myfiles from your phone**
 
 Example with Samsung Galaxy Store.
 
@@ -160,6 +160,16 @@ adb push "C:\Users\[username]\Documents\Samsung Store\com.sec.android.app.samsun
 
 4. **Access file stored in phone and run it**:
 adb shell pm install /data/local/tmp/com.sec.android.app.samsungapps.apk
+
+## **More Information**
+
+https://forums.androidcentral.com/threads/how-to-make-this-stop.1066965/
+https://www.reddit.com/r/Intune/comments/12iyniy/any_know_package_name_of_samsung_app_cloud_so_can/?rdt=52906
+https://android.stackexchange.com/questions/234132/what-is-the-package-name-for-the-default-samsung-gallery-app
+https://stackoverflow.com/questions/65102614/samsung-store-apps-installer-package-name
+https://xdaforums.com/t/my-s10-s10-bloatware-package-name-list.4054003/
+https://community.oneplus.com/thread/1540015
+https://chatgpt.com/share/67964fed-96ec-8008-a60e-96b7f0b5a7d9
 
 ### **Conclusion**
 
