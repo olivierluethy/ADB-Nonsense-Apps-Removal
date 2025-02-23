@@ -1,15 +1,6 @@
-# Benutzerabfrage für das Löschen der Daten
-$deleteData = Read-Host "Do you want to completely delete all app data? (y/n)"
-
-# Bestimmen, ob das -k-Flag verwendet werden soll
-if ($deleteData -eq 'y') {
-    $uninstallFlag = ""
-}
-else {
-    $uninstallFlag = "-k"
-}
-
-# List of package names to remove
+# List of package names targeted for removal
+# This list comprises unnecessary packages pre-installed on our devices that are not typically utilized by users in a traditional manner. Despite their lack of practical use, these packages may collect user data and potentially share or sell it to third parties.
+# Removing all packages from this list poses no risk to the Android device. The device will continue to function normally and can be used without any issues following the removal process.
 $apps = @(
     # BIXBY - THIS REMOVES EVERYTHING NECESARY TO RETAIN SOME FUNCTIONALITY
     "com.samsung.android.bixby.wakeup", # Bixby Wake-up Service
@@ -18,6 +9,7 @@ $apps = @(
     "com.samsung.android.bixby.service", # Bixby Service (Core Bixby Functionality)
     "com.samsung.android.bixby.agent", # Bixby Voice Agent
     "com.samsung.android.bixby.agent.dummy", # Dummy Bixby Agent (Used for background functionality)
+    "com.samsung.android.visionintelligence", # Bixby Vision
     
     # FACEBOOK - Meta (Facebook) Apps
     "com.facebook.system", # Meta App Installer
@@ -49,32 +41,10 @@ $apps = @(
     "com.samsung.android.kidsinstaller", # Samsung Kids Installer
     "com.samsung.android.app.camera.sticker.facearavatar.preload", # Camera Stickers for Kids
 
-    # SAMSUNG LED COVER - Apps Related to Samsung’s LED Cover
-    "com.samsung.android.app.ledbackcover", # LED Back Cover App
-    "com.sec.android.cover.ledcover", # LED Cover Service
 
     # EDGE - People Edge and Edge-related Services
     "com.samsung.android.service.peoplestripe", # People Edge Service
 
-    # SAMSUNG DEX - Samsung's Desktop Experience Mode
-    "com.sec.android.desktopmode.uiservice", # Samsung Dex Service
-    "com.samsung.desktopsystemui", # Desktop UI for Dex Mode
-    "com.sec.android.app.desktoplauncher", # Dex Launcher
-
-    # GENERAL SYSTEM - Miscellaneous System Apps and Services
-    "com.dsi.ant.sample.acquirechannels", # ANT+ Channels
-    "com.dsi.ant.service.socket", # ANT+ Service Socket
-    "com.dsi.ant.server", # ANT+ Server
-    "com.dsi.ant.plugins.antplus", # ANT+ Plugin for Devices
-    "com.android.egg", # Hidden Easter Egg Game
-    "com.sec.android.easyonehand", # Easy One Hand Mode
-    "com.sec.android.widgetapp.samsungapps", # Samsung Apps Widget
-    "com.sec.android.app.launcher", # Samsung One UI Home aka Samsung App Launcher
-    "com.samsung.android.mateagent", # Samsung Device Management Agent
-    "com.sec.android.easyMover.Agent", # Easy Mover (Data Transfer)
-    "com.samsung.android.app.watchmanagerstub", # Samsung Watch Manager Stub
-    "com.sec.android.daemonapp", # Samsung Daemon App
-    "com.samsung.android.app.social", # Samsung Social Hub
 
     # GIMMICKY APPS - AR and Fun Apps
     "com.samsung.android.aremoji", # AR Emoji App
@@ -101,9 +71,17 @@ $apps = @(
     "com.samsung.android.spayfw", # Samsung Pay Framework
     "com.samsung.android.sdk.mobileservice", # Samsung Mobile Services SDK
     "com.samsung.android.digitalkey", # Digital Key Framework for Samsung Wallet
+    "com.samsung.android.samsungpay.gear",
+
+    # SAMSUNG TIPS
+    "com.samsung.android.app.tips",
+
+    # SAMSUNG CALENDAR
+    "com.samsung.android.calendar",
 
     # YOUTUBE - YouTube App
     "com.google.android.youtube", # YouTube App
+    "com.google.android.apps.youtube.music", # YouTube Music
 
     # NETFLIX - Netflix App and Services
     "com.netflix.mediaclient", # Netflix Media Client
@@ -118,6 +96,7 @@ $apps = @(
     "com.google.android.apps.googleassistant", # Google Assistant
     "com.android.chrome", # Google Chrome Browser
     "com.google.android.googlequicksearchbox", # Google App (Search)
+    "com.google.android.apps.messaging", # Google Messages
 
     # SAMSUNG DICTIONARY - Samsung Dictionary App
     "com.diotek.sec.lookup.dictionary", # Samsung Dictionary
@@ -134,11 +113,3 @@ $apps = @(
     # UPDAY - News Service
     "de.axelspringer.yana.zeropage"      # Upday (News App)
 )
-
-# Uninstall each app
-foreach ($app in $apps) {
-    Write-Host "Uninstalling $app..."
-    adb shell pm uninstall $uninstallFlag --user 0 "$app"
-}
-
-Write-Host "Finished uninstalling the apps."
