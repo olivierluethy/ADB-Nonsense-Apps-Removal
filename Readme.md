@@ -221,6 +221,9 @@ adb push "C:\Users\[username]\Documents\Samsung Store\com.sec.android.app.samsun
 adb shell pm install /data/local/tmp/com.sec.android.app.samsungapps.apk
 ```
 
+### **How to uninstall an application if you don't know its package name**
+If you have an application on your Android device and you can't find out its package name, you can download [this](https://play.google.com/store/apps/details?id=com.csdroid.pkg&amp;hl=en) application and it will show you all your user and system applications including their package name, so if you enter its package name to remove it, the application will be removed.
+
 ## **More Information**
 
 What the package name of **Samsung App Cloud** is

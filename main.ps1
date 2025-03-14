@@ -1,5 +1,7 @@
-# Skript initialisieren
+# Skript initialisieren mit UTF-8 Kodierung für Ein- und Ausgabe
 Clear-Host
+[Console]::InputEncoding = [System.Text.Encoding]::UTF8
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 Write-Host "==============================================================" -ForegroundColor Cyan
 Write-Host "         Samsung App Deinstallation Tool" -ForegroundColor Yellow
 Write-Host "==============================================================" -ForegroundColor Cyan
@@ -11,7 +13,7 @@ $workingDirectory = "C:\Users\$([Environment]::UserName)\Documents\ADB-Nonsense-
 Set-Location -Path $workingDirectory
 Write-Host "Arbeitsverzeichnis: $workingDirectory" -ForegroundColor Green
 
-# Pr�fen, ob die Dateien existieren
+# Prüfen, ob die Dateien existieren
 $appsScript = ".\apps.ps1"
 $systemScript = ".\system.ps1"
 
@@ -19,18 +21,19 @@ $systemScript = ".\system.ps1"
 try {
     . $appsScript
     . $systemScript
-} catch {
+}
+catch {
     Write-Host "Fehler beim Laden der Skripte: $_" -ForegroundColor Red
     exit
 }
 
 # Benutzerabfrage
 Write-Host "`n=== Konfiguration der Deinstallation ===" -ForegroundColor Cyan
-$deleteData = Read-Host "Möchten Sie alle Anwendungsdaten vollständig löschen? Ja würde bedeuten, dass die Apps inklusive Catch gelöscht werden. Wenn nein, werden die Apps gelöscht, aber nicht der Catch, so dass Sie bei einer Neuinstallation der gelöschten App nicht alles von der App verlieren. (j/n)"
+$deleteData = Read-Host "Möchten Sie alle Anwendungsdaten vollständig löschen? Ja bedeutet, dass die Apps inklusive Cache gelöscht werden. Wenn nein, werden die Apps gelöscht, aber nicht der Cache. (j/n)"
 $uninstallFlag = if ($deleteData -eq 'j') { "" } else { "-k" }
 
-Write-Warning "Das Entfernen von Samsung UI-Funktionen kann Ihre Benutzererfahrung beeintr�chtigen. Mit Vorsicht fortfahren."
-$deleteSamsungUIFunctionality = Read-Host "`nM�chten Sie auch die Samsung UI-Funktionen entfernen? (j/n)"
+Write-Warning "Das Entfernen von Samsung UI-Funktionen kann Ihre Benutzererfahrung beeinträchtigen. Mit Vorsicht fortfahren."
+$deleteSamsungUIFunctionality = Read-Host "`nMöchten Sie auch die Samsung UI-Funktionen entfernen? (j/n)"
 
 if ($deleteSamsungUIFunctionality -eq 'j') {
     Write-Host "`nWICHTIG:" -ForegroundColor Yellow
@@ -49,18 +52,37 @@ if ($deleteSamsungUIFunctionality -eq 'j') {
     $totalApps += $system.Count
 }
 
-# Deinstallation durchf�hren
+# Funktion zum Prüfen, ob eine App installiert ist
+function Test-AppInstalled($packageName) {
+    $result = adb shell pm list packages | Where-Object { $_ -eq "package:$packageName" }
+    return $null -ne $result
+}
+
+# Deinstallation durchführen
 Write-Host "`n=== Deinstallation wird gestartet ===" -ForegroundColor Cyan
 $currentApp = 0
 
 foreach ($app in $apps) {
     $currentApp++
     Write-Progress -Activity "Deinstalliere Apps" -Status "$currentApp von $totalApps abgeschlossen" -PercentComplete (($currentApp / $totalApps) * 100)
-    Write-Host "Deinstalliere $app..." -ForegroundColor White
+    Write-Host "Prüfe $app..." -ForegroundColor White
+    
     try {
-        adb shell pm uninstall $uninstallFlag --user 0 "$app" | Out-Null
-        Write-Host "  Erfolg: $app wurde entfernt." -ForegroundColor Green
-    } catch {
+        if (Test-AppInstalled -packageName $app) {
+            adb shell pm uninstall $uninstallFlag --user 0 "$app" | Out-Null
+            # Zweite Überprüfung nach Deinstallation
+            if (-not (Test-AppInstalled -packageName $app)) {
+                Write-Host "  Erfolg: $app wurde entfernt." -ForegroundColor Green
+            }
+            else {
+                Write-Host "  Fehler: $app konnte nicht entfernt werden." -ForegroundColor Red
+            }
+        }
+        else {
+            Write-Host "  Info: $app war bereits nicht installiert." -ForegroundColor Yellow
+        }
+    }
+    catch {
         Write-Host "  Fehler: $app konnte nicht entfernt werden. ($_)" -ForegroundColor Red
     }
 }
@@ -69,11 +91,23 @@ if ($deleteSamsungUIFunctionality -eq 'j') {
     foreach ($generalApp in $system) {
         $currentApp++
         Write-Progress -Activity "Deinstalliere Samsung UI-Komponenten" -Status "$currentApp von $totalApps abgeschlossen" -PercentComplete (($currentApp / $totalApps) * 100)
-        Write-Host "Deinstalliere $generalApp..." -ForegroundColor White
+        Write-Host "Prüfe $generalApp..." -ForegroundColor White
+        
         try {
-            adb shell pm uninstall $uninstallFlag --user 0 "$generalApp" | Out-Null
-            Write-Host "  Erfolg: $generalApp wurde entfernt." -ForegroundColor Green
-        } catch {
+            if (Test-AppInstalled -packageName $generalApp) {
+                adb shell pm uninstall $uninstallFlag --user 0 "$generalApp" | Out-Null
+                if (-not (Test-AppInstalled -packageName $generalApp)) {
+                    Write-Host "  Erfolg: $generalApp wurde entfernt." -ForegroundColor Green
+                }
+                else {
+                    Write-Host "  Fehler: $generalApp konnte nicht entfernt werden." -ForegroundColor Red
+                }
+            }
+            else {
+                Write-Host "  Info: $generalApp war bereits nicht installiert." -ForegroundColor Yellow
+            }
+        }
+        catch {
             Write-Host "  Fehler: $generalApp konnte nicht entfernt werden. ($_)" -ForegroundColor Red
         }
     }
@@ -84,4 +118,4 @@ Write-Progress -Activity "Deinstallation" -Completed
 Write-Host "`n==============================================================" -ForegroundColor Cyan
 Write-Host "         Deinstallation abgeschlossen" -ForegroundColor Green
 Write-Host "==============================================================" -ForegroundColor Cyan
-Write-Host "Vielen Dank f�r die Nutzung des Tools!" -ForegroundColor Gray
+Write-Host "Vielen Dank für die Nutzung des Tools!" -ForegroundColor Gray

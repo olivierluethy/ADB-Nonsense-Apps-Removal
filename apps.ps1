@@ -1,115 +1,175 @@
 # List of package names targeted for removal
-# This list comprises unnecessary packages pre-installed on our devices that are not typically utilized by users in a traditional manner. Despite their lack of practical use, these packages may collect user data and potentially share or sell it to third parties.
-# Removing all packages from this list poses no risk to the Android device. The device will continue to function normally and can be used without any issues following the removal process.
+# This list comprises unnecessary pre-installed packages on Samsung devices that are not typically utilized by users in a traditional manner.
+# These packages may collect user data and potentially share or sell it to third parties, despite their lack of practical use.
+# Removing all packages from this list poses no risk to the Android device; it will continue to function normally post-removal.
+
 $apps = @(
-    # BIXBY - THIS REMOVES EVERYTHING NECESARY TO RETAIN SOME FUNCTIONALITY
-    "com.samsung.android.bixby.wakeup", # Bixby Wake-up Service
-    "com.samsung.android.app.spage", # Samsung Bixby Home (Samsung App)
-    "com.samsung.android.app.routines", # Bixby Routines (Automation App)
-    "com.samsung.android.bixby.service", # Bixby Service (Core Bixby Functionality)
-    "com.samsung.android.bixby.agent", # Bixby Voice Agent
-    "com.samsung.android.bixby.agent.dummy", # Dummy Bixby Agent (Used for background functionality)
-    "com.samsung.android.visionintelligence", # Bixby Vision
-    
-    # FACEBOOK - Meta (Facebook) Apps
-    "com.facebook.system", # Meta App Installer
-    "com.facebook.appmanager", # Meta App Manager
-    "com.facebook.services", # Meta Services
-    "com.facebook.katana", # Facebook App
-    
-    # CAR MODE - Samsung Car Mode App
-    "com.samsung.android.drivelink.stub", # Samsung's DriveLink Car Mode
+    # === BIXBY SERVICES ===
+    # Samsung's virtual assistant and related features
+    "com.samsung.android.bixby.wakeup", # Bixby Wake-up Service - Listens for voice activation
+    "com.samsung.android.app.spage", # Bixby Home - Samsung's Bixby dashboard app
+    "com.samsung.android.app.routines", # Bixby Routines - Automation tool for Bixby
+    "com.samsung.android.bixby.service", # Bixby Service - Core functionality for Bixby
+    "com.samsung.android.bixby.agent", # Bixby Voice Agent - Handles voice commands
+    "com.samsung.android.bixby.agent.dummy", # Dummy Bixby Agent - Background support for Bixby
+    "com.samsung.android.visionintelligence", # Bixby Vision - Image recognition feature
 
-    # SAMSUNG GAME LAUNCHER - Samsung's Gaming Hub & Related Apps
-    "com.samsung.android.game.gamehome", # Gaming Hub
-    "com.enhance.gameservice", # Game Service
-    "com.samsung.android.game.gametools", # Game Tools
-    "com.samsung.android.game.gos", # Game Optimization Service
-    "com.samsung.android.gametuner.thin", # Game Tuner for Performance
+    # === FACEBOOK / META APPS ===
+    # Pre-installed Meta services and apps
+    "com.facebook.system", # Meta App Installer - Installs Meta apps
+    "com.facebook.appmanager", # Meta App Manager - Manages Meta app updates
+    "com.facebook.services", # Meta Services - Background services for Meta apps
+    "com.facebook.katana", # Facebook App - Main Facebook application
 
-    # SAMSUNG BROWSER - Samsung’s In-built Web Browser
-    "com.sec.android.app.sbrowser", # Samsung Browser
-    "com.samsung.android.app.sbrowseredge", # Samsung Browser Edge Features
+    # === CAR MODE ===
+    # Samsung's car-related functionality
+    "com.samsung.android.drivelink.stub", # Samsung DriveLink - Stub for Car Mode app
 
-    # GEAR VR - Virtual Reality Services
-    "com.samsung.android.hmt.vrsvc", # Gear VR Service
-    "com.samsung.android.app.vrsetupwizardstub", # VR Setup Wizard (Unused Stub)
-    "com.samsung.android.hmt.vrshell", # Gear VR Shell
-    "com.google.vr.vrcore", # Google VR Core
+    # === SAMSUNG GAMING FEATURES ===
+    # Gaming hub and optimization tools
+    "com.samsung.android.game.gamehome", # Gaming Hub - Central app for Samsung gaming
+    "com.enhance.gameservice", # Game Service - Background gaming support
+    "com.samsung.android.game.gametools", # Game Tools - In-game enhancement features
+    "com.samsung.android.game.gos", # Game Optimization Service - Optimizes game performance
+    "com.samsung.android.gametuner.thin", # Game Tuner - Performance tuning for games
 
-    # SAMSUNG KIDS - Samsung Kids Mode & Related Apps
-    "com.samsung.android.kidsinstaller", # Samsung Kids Installer
-    "com.samsung.android.app.camera.sticker.facearavatar.preload", # Camera Stickers for Kids
+    # === SAMSUNG INTERNET BROWSER ===
+    # Samsung's built-in web browser
+    "com.sec.android.app.sbrowser", # Samsung Internet Browser - Main browser app
+    "com.samsung.android.app.sbrowseredge", # Samsung Browser Edge Features - Edge panel integration
 
+    # === SAMSUNG MISCELLANEOUS APPS ===
+    # Various Samsung utilities and services
+    "com.samsung.android.forest", # Digital Detox - App for focus and screen time management
+    "com.samsung.android.game.gos", # Game Optimization Service (Duplicate) - Game performance enhancer
+    "com.samsung.android.knox.kpecore", # Knox KPE Core - Enterprise security core
+    "com.samsung.android.knox.containercore", # Knox Container Core - Secure container service
+    "com.samsung.android.rubin.app", # Rubin App - Personalization service
+    "com.samsung.android.themestore", # Theme Store - Samsung theme marketplace
+    "com.samsung.android.themecenter", # Theme Center - Theme management app
 
-    # EDGE - People Edge and Edge-related Services
-    "com.samsung.android.service.peoplestripe", # People Edge Service
+    # === SAMSUNG SPEECH-TO-TEXT LANGUAGE PACKS ===
+    # Language packs for Samsung's speech-to-text engine
+    "com.samsung.SMT.lang_fr_fr_f00", # French (France) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_de_de_f00", # German (Germany) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_hi_in_f00", # Hindi (India) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_it_it_f00", # Italian (Italy) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_pl_pl_f00", # Polish (Poland) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_ru_ru_f00", # Russian (Russia) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_th_th_f00", # Thai (Thailand) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_en_gb_f00", # English (UK) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_en_us_f00", # English (US) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_es_us_f00", # Spanish (US) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_vi_vn_f00", # Vietnamese (Vietnam) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_es_es_f00", # Spanish (Spain) Language Pack - Speech-to-text support
+    "com.samsung.SMT.lang_en_us_l03", # English (US) Alternate Language Pack - Speech-to-text support
 
+    # === GEAR VR SERVICES ===
+    # Virtual reality support for Samsung Gear VR
+    "com.samsung.android.hmt.vrsvc", # Gear VR Service - Core VR functionality
+    "com.samsung.android.app.vrsetupwizardstub", # VR Setup Wizard Stub - Setup assistant for VR
+    "com.samsung.android.hmt.vrshell", # Gear VR Shell - VR environment interface
+    "com.google.vr.vrcore", # Google VR Core - Google’s VR framework
 
-    # GIMMICKY APPS - AR and Fun Apps
-    "com.samsung.android.aremoji", # AR Emoji App
-    "com.google.ar.core", # Google AR Core (Augmented Reality)
-    "flipboard.boxer.app", # Flipboard App
-    "com.samsung.android.wellbeing", # Samsung Wellbeing (Digital Wellbeing)
-    "com.samsung.android.da.daagent", # Samsung's DA Agent
-    "com.samsung.android.service.livedrawing", # Live Drawing Service
-    "com.sec.android.mimage.avatarstickers", # Avatar Stickers (AR Emojis)
-    "com.samsung.android.ardrawing", # AR Doodle
-    "com.samsung.android.aremojieditor", # AR Emoji Editor
-    "com.samsung.android.arzone", # AR Zone (AR Features)
+    # === SAMSUNG CALENDAR ===
+    # Samsung's calendar application
+    "com.samsung.android.calendar", # Samsung Calendar - Calendar and event management
 
-    # PRINTING - Printer Services and Apps
-    "com.android.bips", # BIPS Printing Service
-    "com.google.android.printservice.recommendation", # Print Service Recommendation
-    "com.android.printspooler", # Print Spooler Service
+    # === SAMSUNG KIDS MODE ===
+    # Features for child-friendly usage
+    "com.samsung.android.kidsinstaller", # Samsung Kids Installer - Installs Kids Mode
+    "com.samsung.android.app.camera.sticker.facearavatar.preload", # Face AR Avatar Stickers - Preloaded AR stickers for kids
 
-    # SAMSUNG PASS / PAY - Samsung’s Payment & Authentication Services
-    "com.samsung.android.samsungpassautofill", # Samsung Pass Autofill
-    "com.samsung.android.authfw", # Authentication Framework for Samsung
-    "com.samsung.android.samsungpass", # Samsung Pass (Password Management)
-    "com.samsung.android.spay", # Samsung Pay
-    "com.samsung.android.spayfw", # Samsung Pay Framework
-    "com.samsung.android.sdk.mobileservice", # Samsung Mobile Services SDK
-    "com.samsung.android.digitalkey", # Digital Key Framework for Samsung Wallet
-    "com.samsung.android.samsungpay.gear",
+    # === EDGE FEATURES ===
+    # Samsung Edge panel services
+    "com.samsung.android.service.peoplestripe", # People Edge Service - Edge panel contacts feature
 
-    # SAMSUNG TIPS
-    "com.samsung.android.app.tips",
+    # === MICROSOFT SWIFTKEY KEYBOARD ===
+    # Pre-installed keyboard app
+    "com.swiftkey.swiftkeyconfigurator", # SwiftKey Configurator - Keyboard setup tool
+    "com.touchtype.swiftkey", # SwiftKey Keyboard - Main keyboard app
 
-    # SAMSUNG CALENDAR
-    "com.samsung.android.calendar",
+    # === GIMMICKY AR & FUN APPS ===
+    # Augmented reality and entertainment apps
+    "com.samsung.android.aremoji", # AR Emoji - Creates animated avatars
+    "com.google.ar.core", # Google AR Core - Augmented reality framework
+    "flipboard.boxer.app", # Flipboard - News and content aggregation app
+    "com.samsung.android.wellbeing", # Samsung Wellbeing - Digital wellbeing tracker
+    "com.samsung.android.da.daagent", # DA Agent - Diagnostic agent for Samsung
+    "com.samsung.android.service.livedrawing", # Live Drawing - Real-time drawing service
+    "com.sec.android.mimage.avatarstickers", # Avatar Stickers - AR emoji stickers
+    "com.samsung.android.ardrawing", # AR Doodle - AR drawing tool
+    "com.samsung.android.aremojieditor", # AR Emoji Editor - Edits AR emojis
+    "com.samsung.android.arzone", # AR Zone - Hub for AR features
 
-    # YOUTUBE - YouTube App
-    "com.google.android.youtube", # YouTube App
-    "com.google.android.apps.youtube.music", # YouTube Music
+    # === PRINTING SERVICES ===
+    # Printer-related functionality
+    "com.android.bips", # BIPS Printing Service - Built-in print service
+    "com.google.android.printservice.recommendation", # Print Service Recommendation - Suggests print services
+    "com.android.printspooler", # Print Spooler - Manages print jobs
 
-    # NETFLIX - Netflix App and Services
-    "com.netflix.mediaclient", # Netflix Media Client
-    "com.netflix.partner.activation", # Netflix Partner Activation Service
+    # === SAMSUNG PAYMENT & AUTHENTICATION ===
+    # Samsung Pass, Pay, and wallet services
+    "com.samsung.android.samsungpassautofill", # Samsung Pass Autofill - Password autofill service
+    "com.samsung.android.authfw", # Authentication Framework - Core auth service
+    "com.samsung.android.samsungpass", # Samsung Pass - Password management app
+    "com.samsung.android.spay", # Samsung Pay - Mobile payment app
+    "com.samsung.android.spayfw", # Samsung Pay Framework - Payment framework
+    "com.samsung.android.sdk.mobileservice", # Samsung Mobile Services SDK - Developer kit for services
+    "com.samsung.android.digitalkey", # Digital Key - Digital key for Samsung Wallet
+    "com.samsung.android.samsungpay.gear", # Samsung Pay for Gear - Payment for wearables
+    "com.sec.android.app.billing", # Samsung Checkout - Billing service
+    "com.samsung.android.dkey", # Samsung Wallet Digital Key - Wallet key service
 
-    # SAMSUNG SECURE FOLDER - Samsung's Secure Folder Feature
-    "com.samsung.knox.securefolder", # Samsung Secure Folder
-    "com.samsung.android.scloud", # Samsung Cloud Assistant
-    "com.samsung.android.mdx", # Samsung Core Services (MDX Service)
-    
-    # GOOGLE - Google Apps and Services
-    "com.google.android.apps.googleassistant", # Google Assistant
-    "com.android.chrome", # Google Chrome Browser
-    "com.google.android.googlequicksearchbox", # Google App (Search)
-    "com.google.android.apps.messaging", # Google Messages
+    # === SAMSUNG UTILITIES ===
+    # Additional Samsung tools and services
+    "com.sec.android.daemonapp", # Samsung Weather - Weather forecast app
+    "com.samsung.android.app.settings.bixby", # Bixby Settings - Bixby integration in settings
+    "com.samsung.android.smartsuggestions", # Smart Suggestions - AI-driven suggestions
+    "com.sec.android.widgetapp.webmanual", # Web Manual Widget - Online manual widget
+    "com.samsung.android.service.aircommand", # Air Command - S Pen feature hub
+    "com.samsung.android.app.tips", # Samsung Tips - Tips and tutorials app
 
-    # SAMSUNG DICTIONARY - Samsung Dictionary App
-    "com.diotek.sec.lookup.dictionary", # Samsung Dictionary
+    # === VIDEO & MUSIC STREAMING ===
+    # Pre-installed streaming apps
+    "com.google.android.youtube", # YouTube - Video streaming app
+    "com.google.android.apps.youtube.music", # YouTube Music - Music streaming app
+    "com.netflix.mediaclient", # Netflix - Main Netflix streaming app
+    "com.netflix.partner.activation", # Netflix Partner Activation - Activation service
 
-    # LIVE TRANSCRIBE - Accessibility Services for Transcription
-    "com.google.audio.hearing.visualization.accessibility.scribe", # Live Transcribe & Sound Notifications
+    # === SAMSUNG SECURE FEATURES ===
+    # Security and cloud services
+    "com.samsung.knox.securefolder", # Samsung Secure Folder - Secure app container
+    "com.samsung.android.scloud", # Samsung Cloud - Cloud backup service
+    "com.samsung.android.mdx", # Samsung Core Services (MDX) - Core device services
 
-    # LANGUAGE PACKS - Language Packs for Samsung Apps
-    "com.samsung.android.language.en_pt", # English-Portuguese Language Pack
-    
-    # GROUP SHARE - Group Sharing Service
-    "com.samsung.android.groupshare", # Group Sharing Service
+    # === GOOGLE APPS & SERVICES ===
+    # Pre-installed Google applications
+    "com.google.android.apps.googleassistant", # Google Assistant - Virtual assistant app
+    "com.android.hotwordenrollment.xgoogle", # Google Assistant Hotword (XGoogle) - Voice activation
+    "com.android.hotwordenrollment.okgoogle", # Google Assistant Hotword (OK Google) - Voice activation
+    "com.android.chrome", # Google Chrome - Web browser
+    "com.google.android.googlequicksearchbox", # Google App - Search and quick access app
+    "com.google.android.apps.messaging", # Google Messages - SMS/MMS app
+    "com.google.android.documentsui", # Google Files - File management app
 
-    # UPDAY - News Service
-    "de.axelspringer.yana.zeropage"      # Upday (News App)
+    # === SAMSUNG DICTIONARY ===
+    # Dictionary service
+    "com.diotek.sec.lookup.dictionary", # Samsung Dictionary - Built-in dictionary app
+
+    # === ACCESSIBILITY SERVICES ===
+    # Tools for accessibility
+    "com.google.audio.hearing.visualization.accessibility.scribe", # Live Transcribe - Real-time transcription
+
+    # === LANGUAGE SUPPORT ===
+    # Additional language packs
+    "com.samsung.android.language.en_pt", # English-Portuguese Language Pack - Language support
+
+    # === SHARING SERVICES ===
+    # Group sharing functionality
+    "com.samsung.android.groupshare", # Group Share - Content sharing service
+
+    # === NEWS AGGREGATION ===
+    # Pre-installed news app
+    "de.axelspringer.yana.zeropage"                      # Upday - News aggregation app
 )
